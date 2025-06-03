@@ -1,37 +1,138 @@
+:root {
+    /* Default meme details, will be controlled through JS later */
+    --memeurl: 'https://i.imgflip.com/1g8my4.jpg'; 
+    --memewidth: 600;
+    --memeheight: 908;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-color: #ffe4ec;
 }
 
 * {
     font-family: 'Karla', sans-serif;
 }
 
-::-webkit-scrollbar {
-    width: 0px;
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .navbar {
     display: flex;
     align-items: center;
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    background: linear-gradient(90deg, #f857a6, #ff5858);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.navbar {
-    background: linear-gradient(to right, #672280 1.18%, #A626D3 100%);
-}
 
 .logo-img {
-    width: 50px;
-    margin-inline-end: 10px;
+    width: 40px;
 }
 
 .logo-text {
     font-size: x-large;
     font-weight: bold;
     color: white;
+    padding-bottom: 5px;
+}
+
+.body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.input {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+}
+
+.input-area {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-text {
+    width: 12.5rem;
+    height: 34px;
+    border: 2px solid rgba(0, 0, 0, 0.501);
+    border-radius: 5px;
+    padding-inline: 1rem;
+    font-size: large;
+    background-color: #ffe4ec;
+    outline: none;
+}
+
+.input-text:focus {
+    border: 2px solid #f857a6;
+}
+
+.submit {
+    width: 100%;
+    padding: 0.5rem;
+    background: linear-gradient(90deg, #f857a6, #ff5858);
+    outline: none;
+    border: none;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.meme {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meme-box {
+    border: 2px solid gray;
+    border-radius: 10px;
+    aspect-ratio: var(--memewidth) / var(--memeheight);
+    height: 500px;
+    width: auto;
+    position: relative;
+
+    background-image: url('https://i.imgflip.com/1g8my4.jpg');
+    background-size: contain;
+}
+
+.meme-text {
+    position: absolute;
+    width: 100%;
+
+    text-align: center;
+    font-size: 50px;
+    overflow-wrap: break-word;
+    font-weight: bold;
+    color: rgb(223, 223, 223);
+
+    font-family: fantasy;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-transform: uppercase;
+}
+
+.meme-text-top {
+    top: 0;     
+    transform: translateY(10px);
+}
+.meme-text-bottom {
+    bottom: 0;
+    transform: translateY(-10px);
 }
