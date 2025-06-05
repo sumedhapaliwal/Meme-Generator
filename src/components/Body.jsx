@@ -1,32 +1,66 @@
+import useRunOnce from "./hooks/useRunOnce";
 import Input from "./Input"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { updateMemeInCSS } from "./lib/funcs";
 
-const MEME_DATA = [{ // Hard coded the api response
-    "id":"87743020",
-    "name":"Two Buttons",
-    "url":"https://i.imgflip.com/1g8my4.jpg",
-    "width":600,
-    "height":908,
-    "box_count":3,
-    "captions":1112750
-}]
+const MEME_API = "https://api.imgflip.com/get_memes";
 
 export default function Body() {
-    let [meme, setMeme] = useState(MEME_DATA[0])
+    const memes = useRef([]);
+    
+    const [memeCaption, setMemeCaption] = useState(getRandomMeme().caption);
+    const [meme, setMeme] = useState(getRandomMeme().meme);
 
-    function changeText(e, side) {
-        console.log(side)
+    function getRandomMeme() {
+        const randomIndex = Math.floor(Math.random() * memes.current.length);
+        return {
+            caption: {
+                topText: "",
+                bottomText: "",
+            },
+            meme: {
+                url: memes.current[randomIndex]?.url || "",
+                width: memes.current[randomIndex]?.width || 0,
+                height: memes.current[randomIndex]?.height || 0
+            }
+        };
+    }
+
+    function setRandomMeme() {
+        const randomMeme = getRandomMeme();
+        setMeme(randomMeme.meme);
+        setMemeCaption(randomMeme.caption);
+    }
+
+    function changeMemeText(value, side) {
         setMeme(prevMeme => {
             return {
                 ...prevMeme,
-                [side]: e.target.value
-            }
-        })
+                [side]: value
+            };
+        });
     }
+
+    useRunOnce(() => {
+        fetch(MEME_API)
+            .then(response => response.json())
+            .then(data => {
+                memes.current = data.data.memes
+                setRandomMeme();
+            });
+    }, []);
+
+    useEffect(() => {
+        updateMemeInCSS(meme);
+    }, [meme]);
 
     return (
         <div className="body">
-            <Input change={changeText}/>
+            <Input 
+                setRandomMeme={setRandomMeme} 
+                changeMemeText={changeMemeText}
+            />
+
             <div className="meme">
                 <div className="meme-box">
                     {

@@ -1,4 +1,4 @@
-export default function Input({ change }) {
+export default function Input({ setRandomMeme, changeMemeText }) {
     return (
         <div className="input">
             <div className="input-area">
@@ -8,7 +8,7 @@ export default function Input({ change }) {
                     type="text"
                     placeholder="Meme Text Top" 
                     onChange={
-                        e => change(e, 'topText')
+                        e => changeMemeText(e.currentTarget.value, 'topText')
                     }
                     autoFocus
                 />
@@ -18,11 +18,16 @@ export default function Input({ change }) {
                     type="text" 
                     placeholder="Meme Text Bottom"
                     onChange={
-                        e =>change(e, 'bottomText')
+                        e => changeMemeText(e.currentTarget.value, 'bottomText')
                     } 
                 />
             </div>
-            <button className="submit">New Meme</button>
+            <button 
+                className="submit" 
+                onClick={setRandomMeme}
+            >
+                New Meme
+            </button>
         </div>
     )
 }
