@@ -8,5 +8,5 @@ export default function useRunOnce(effect) {
             effect();
             hasRun.current = true;
         }
-    }, []);
+    }, [effect]);
 }
