@@ -33,7 +33,7 @@ export default function Body() {
     }
 
     function changeMemeText(value, side) {
-        setMeme(prevMeme => {
+        setMemeCaption(prevMeme => {
             return {
                 ...prevMeme,
                 [side]: value
@@ -64,15 +64,15 @@ export default function Body() {
             <div className="meme">
                 <div className="meme-box">
                     {
-                        meme.topText && 
+                        memeCaption.topText && 
                         <div className="meme-text meme-text-top" id="top">
-                            {meme.topText}
+                            {memeCaption.topText}
                         </div>
                     }
                     {
-                        meme.bottomText && 
+                        memeCaption.bottomText && 
                         <div className="meme-text meme-text-bottom" id="bottom">
-                            {meme.bottomText}
+                            {memeCaption.bottomText}
                         </div>
                     }
                 </div>
