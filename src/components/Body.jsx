@@ -1,7 +1,7 @@
-import useRunOnce from "./hooks/useRunOnce";
 import Input from "./Input"
 import { useEffect, useRef, useState } from "react"
-import { updateMemeInCSS } from "./lib/funcs";
+import { updateMemeInCSS } from "../lib/funcs";
+import useRunOnce from "../hooks/useRunOnce";
 
 const MEME_API = "https://api.imgflip.com/get_memes";
 
